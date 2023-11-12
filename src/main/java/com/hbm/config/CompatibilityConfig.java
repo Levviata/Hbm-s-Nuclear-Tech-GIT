@@ -55,7 +55,8 @@ public class CompatibilityConfig {
 	public static HashMap endTixiteSpawn;
 
 	public static HashMap bedrockOilSpawn;
-	
+
+	public static boolean enableWorldGen;
 	public static HashMap radioStructure;
 	public static HashMap antennaStructure;
 	public static HashMap atomStructure;
@@ -116,6 +117,9 @@ public class CompatibilityConfig {
 		String dimRadComment = "Amount of background radiation in the dimension in Rad/s - <dimID:Rad> (Int:Float)";
 		dimensionRad = CommonConfig.createConfigHashMap(config, CATEGORY_DIMRAD, "01.01_dimensionRadiation", dimRadComment, "Int", "Float", new String[]{ "0:0.0", "-1:0.666", "1:0.001", "-28:0.245", "-27:0.0288", "-26:0.0288", "-29:0.0212", "-30:10", "-31:0.1" }, ":");
 
+		//Worldgen
+
+
 		//Ores
 		uraniumSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "01.01_uraniumSpawnrate", "Amount of uranium ore veins per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "0:7" }, ":");
 		titaniumSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "01.02_titaniumSpawnrate", "Amount of titanium ore veins per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "0:8" }, ":");
@@ -165,35 +169,36 @@ public class CompatibilityConfig {
 		
 
 		//Structures
-		radioStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.01_radioSpawn", "Spawn radio station on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
-		antennaStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.02_antennaSpawn", "Spawn antenna on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:750" }, ":");
-		atomStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.03_atomSpawn", "Spawn power plant on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		vertibirdStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.04_vertibirdSpawn", "Spawn vertibird on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		dungeonStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.05_dungeonSpawn", "Spawn library dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:64" }, ":");
-		relayStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.06_relaySpawn", "Spawn relay on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		satelliteStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.07_satelliteSpawn", "Spawn satellite dish on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		bunkerStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.08_bunkerSpawn", "Spawn bunker on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
-		siloStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.09_siloSpawn", "Spawn missile silo on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
-		factoryStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.10_factorySpawn", "Spawn factory on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
-		dudStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.11_dudSpawn", "Spawn dud on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		spaceshipStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.12_spaceshipSpawn", "Spawn spaceship on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
-		barrelStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.13_barrelSpawn", "Spawn waste tank on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
-		broadcaster = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.14_broadcasterSpawn", "Spawn corrupt broadcaster on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
-		minefreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.15_landmineSpawn", "Spawn AP landmine on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:64" }, ":");
-		radminefreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.16_sellafiteChunkSpawn", "Spawn sellafield block on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:128" }, ":");
-		radfreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.17_radHotsoptSpawn", "Spawn big radiation hotspot on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
-		vaultfreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.18_vaultSpawn", "Spawn locked safe on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:2500" }, ":");
+		enableWorldGen = CommonConfig.createConfigBool(config, CATEGORY_DIMSTRUC, "03.01_enableWorldGen", "Enable worldgen", true);
+		radioStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.02_radioSpawn", "Spawn radio station on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
+		antennaStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.03_antennaSpawn", "Spawn antenna on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:750" }, ":");
+		atomStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.04_atomSpawn", "Spawn power plant on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		vertibirdStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.05_vertibirdSpawn", "Spawn vertibird on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		dungeonStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.06_dungeonSpawn", "Spawn library dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:64" }, ":");
+		relayStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.07_relaySpawn", "Spawn relay on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		satelliteStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.08_satelliteSpawn", "Spawn satellite dish on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		bunkerStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.09_bunkerSpawn", "Spawn bunker on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
+		siloStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.10_siloSpawn", "Spawn missile silo on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
+		factoryStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.11_factorySpawn", "Spawn factory on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
+		dudStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.12_dudSpawn", "Spawn dud on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		spaceshipStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.13_spaceshipSpawn", "Spawn spaceship on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
+		barrelStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.14_barrelSpawn", "Spawn waste tank on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
+		broadcaster = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.15_broadcasterSpawn", "Spawn corrupt broadcaster on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
+		minefreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.16_landmineSpawn", "Spawn AP landmine on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:64" }, ":");
+		radminefreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.17_sellafiteChunkSpawn", "Spawn sellafield block on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:128" }, ":");
+		radfreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.18_radHotsoptSpawn", "Spawn big radiation hotspot on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:5000" }, ":");
+		vaultfreq = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.19_vaultSpawn", "Spawn locked safe on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:2500" }, ":");
 		
-		geyserWater = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.19_geyserWaterSpawn", "Spawn water geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:3000" }, ":");
-		geyserChlorine = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.20_geyserChlorineSpawn", "Spawn poison geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:3000" }, ":");
-		geyserVapor = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.21_geyserVaporSpawn", "Spawn vapor geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		geyserNether = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.22_geyserNetherSpawn", "Spawn nether geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "-1:2" }, ":");
+		geyserWater = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.20_geyserWaterSpawn", "Spawn water geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:3000" }, ":");
+		geyserChlorine = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.21_geyserChlorineSpawn", "Spawn poison geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:3000" }, ":");
+		geyserVapor = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.22_geyserVaporSpawn", "Spawn vapor geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		geyserNether = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.23_geyserNetherSpawn", "Spawn nether geyser on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "-1:2" }, ":");
 		
-		meteorStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.23_meteorStructureSpan", "Spawn meteor dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:15000" }, ":");
-		capsuleStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.24_capsuleSpawn", "Spawn landing capsule on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:100" }, ":");
-		arcticStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.25_arcticVaultSpawn", "Spawn artic code vault on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
-		jungleStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.26_jungleDungeonSpawn", "Spawn jungle dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:2000" }, ":");
-		pyramidStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.27_pyramidSpawn", "Spawn pyramid on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:4000" }, ":");
+		meteorStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.24_meteorStructureSpan", "Spawn meteor dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:15000" }, ":");
+		capsuleStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.25_capsuleSpawn", "Spawn landing capsule on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:100" }, ":");
+		arcticStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.26_arcticVaultSpawn", "Spawn artic code vault on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");
+		jungleStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.27_jungleDungeonSpawn", "Spawn jungle dungeon on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:2000" }, ":");
+		pyramidStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DUNGEON, "03.28_pyramidSpawn", "Spawn pyramid on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:4000" }, ":");
 		
 		meteorStrikeChance = CommonConfig.createConfigHashMap(config, CATEGORY_METEOR, "05.01_meteorStrikeChance", "The probability of a meteor spawning per tick (an average of once every nTH ticks) - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:"+20 * 60 * 60 * 5, "-28:"+20 * 60, "-27:"+20 * 60 * 10, "-26:"+20 * 60 * 10, "-29:"+20 * 60 * 13, "-30:"+20 * 60 * 1000, "-31:"+20 * 60 * 35 }, ":");
 		meteorShowerChance = CommonConfig.createConfigHashMap(config, CATEGORY_METEOR, "05.02_meteorShowerChance", "The probability of a meteor spawning during meteor shower per tick (an average of once every nTH ticks) - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:"+20 * 60 * 15, "-28:"+20 * 60, "-27:"+20 * 60 * 10, "-26:"+20 * 60 * 10, "-29:"+20 * 60 * 13, "-30:"+20 * 60 * 1000, "-31:"+20 * 60 * 35 }, ":");

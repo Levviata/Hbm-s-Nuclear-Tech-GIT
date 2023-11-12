@@ -396,6 +396,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 
+import static com.hbm.config.CompatibilityConfig.enableWorldGen;
+
 @Mod(modid = RefStrings.MODID, version = RefStrings.VERSION, name = RefStrings.NAME)
 public class MainRegistry {
 
@@ -568,7 +570,9 @@ public class MainRegistry {
 		PotionRecipes.registerPotionRecipes();
 
 		proxy.registerRenderInfo();
-		HbmWorld.mainRegistry();
+		if (enableWorldGen) {
+			HbmWorld.mainRegistry();
+		}
 		proxy.preInit(event);
 		Library.initSuperusers();
 		
