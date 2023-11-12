@@ -117,9 +117,6 @@ public class CompatibilityConfig {
 		String dimRadComment = "Amount of background radiation in the dimension in Rad/s - <dimID:Rad> (Int:Float)";
 		dimensionRad = CommonConfig.createConfigHashMap(config, CATEGORY_DIMRAD, "01.01_dimensionRadiation", dimRadComment, "Int", "Float", new String[]{ "0:0.0", "-1:0.666", "1:0.001", "-28:0.245", "-27:0.0288", "-26:0.0288", "-29:0.0212", "-30:10", "-31:0.1" }, ":");
 
-		//Worldgen
-
-
 		//Ores
 		uraniumSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "01.01_uraniumSpawnrate", "Amount of uranium ore veins per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "0:7" }, ":");
 		titaniumSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "01.02_titaniumSpawnrate", "Amount of titanium ore veins per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "0:8" }, ":");
@@ -166,7 +163,6 @@ public class CompatibilityConfig {
 		netherCobaltSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "02.N06_cobaltSpawnrate", "Amount of nether cobalt per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "-1:2" }, ":");
 		
 		endTixiteSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "03.E01_tixiteSpawnrate", "Amount of end trixite per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "1:8" }, ":");
-		
 
 		//Structures
 		enableWorldGen = CommonConfig.createConfigBool(config, CATEGORY_DIMSTRUC, "03.01_enableWorldGen", "Enable worldgen", true);
