@@ -384,7 +384,6 @@ import com.hbm.render.item.ItemRendererHot;
 import com.hbm.render.item.ItemRendererMachine;
 import com.hbm.render.item.ItemRendererMeteorSword;
 import com.hbm.render.item.ItemRendererBedrockOre;
-import com.hbm.render.item.weapon.GunRevolverRender;
 import com.hbm.render.item.weapon.ItemRedstoneSwordRender;
 import com.hbm.render.item.weapon.ItemRenderBFLauncher;
 import com.hbm.render.item.weapon.ItemRenderBigSword;
@@ -664,6 +663,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import paulscode.sound.SoundSystemConfig;
 
+import static com.hbm.handler.ModChecker.isItemHeldFromHBM;
 public class ClientProxy extends ServerProxy {
 	
 	public static KeyBinding jetpackActivate;
@@ -2225,24 +2225,27 @@ public class ClientProxy extends ServerProxy {
 		
 		return this.vanished.get(e.getEntityId()) > System.currentTimeMillis();
 	}
-	
-	@Override
-	public boolean getIsKeyPressed(EnumKeybind key) {
+    @Override
+    public boolean getIsKeyPressed(EnumKeybind key) {
 
-		switch(key){
-		case JETPACK:			return Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
-		case TOGGLE_JETPACK:	return HbmKeybinds.jetpackKey.isKeyDown();
-		case TOGGLE_HEAD:		return HbmKeybinds.hudKey.isKeyDown();
-		case RELOAD:			return HbmKeybinds.reloadKey.isKeyDown();
-		case CRANE_UP:			return HbmKeybinds.craneUpKey.isKeyDown();
-		case CRANE_DOWN:		return HbmKeybinds.craneDownKey.isKeyDown();
-		case CRANE_LEFT:		return HbmKeybinds.craneLeftKey.isKeyDown();
-		case CRANE_RIGHT:		return HbmKeybinds.craneRightKey.isKeyDown();
-		case CRANE_LOAD:		return HbmKeybinds.craneLoadKey.isKeyDown();
-		}
+        switch(key){
+            case JETPACK:        return Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+            case TOGGLE_JETPACK:   return HbmKeybinds.jetpackKey.isKeyDown();
+            case TOGGLE_HEAD:     return HbmKeybinds.hudKey.isKeyDown();
+            case RELOAD:
+                if (isItemHeldFromHBM()) {
+                    return HbmKeybinds.reloadKey.isKeyDown();
+                }
+                return false;
+            case CRANE_UP:       return HbmKeybinds.craneUpKey.isKeyDown();
+            case CRANE_DOWN:      return HbmKeybinds.craneDownKey.isKeyDown();
+            case CRANE_LEFT:      return HbmKeybinds.craneLeftKey.isKeyDown();
+            case CRANE_RIGHT:     return HbmKeybinds.craneRightKey.isKeyDown();
+            case CRANE_LOAD:      return HbmKeybinds.craneLoadKey.isKeyDown();
+        }
 
-		return false;
-	}
+        return false;
+    }
 
 	@Override
 	public EntityPlayer me() {

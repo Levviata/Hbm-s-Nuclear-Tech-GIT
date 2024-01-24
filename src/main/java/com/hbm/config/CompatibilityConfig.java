@@ -6,6 +6,8 @@ import java.util.HashSet;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import static com.hbm.config.WorldConfig.*;
+
 public class CompatibilityConfig {
 
 	public static HashMap dimensionRad;
@@ -56,7 +58,6 @@ public class CompatibilityConfig {
 
 	public static HashMap bedrockOilSpawn;
 
-	public static boolean enableWorldGen;
 	public static HashMap radioStructure;
 	public static HashMap antennaStructure;
 	public static HashMap atomStructure;
@@ -95,6 +96,9 @@ public class CompatibilityConfig {
 	public static HashMap mobRadresistance;
 	public static HashSet mobRadimmune;
 
+	public static boolean enableWorldGen = enableWorldGenReference;
+	public static boolean enableStructureGen = enableStructureGenReference;
+	public static boolean enableOreGen = enableOreGenReference;
 	public static boolean mobGear = true;
 
 	public static boolean modLoot = true;
@@ -106,6 +110,7 @@ public class CompatibilityConfig {
 
 	
 	public static void loadFromConfig(Configuration config) {
+		final String CATEGORY_WORLD_GEN = "00_dimension_world_gen";
 		final String CATEGORY_DIMRAD = "01_dimension_radiation";
 		final String CATEGORY_DIMORE = "02_dimension_ores";
 		final String CATEGORY_DIMSTRUC = "03_dimension_structures";
@@ -113,6 +118,10 @@ public class CompatibilityConfig {
 		final String CATEGORY_METEOR = "05_dimension_meteors";
 		final String CATEGORY_MOB = "06_mobs";
 		final String CATEGORY_NUKES = "07_nukes";
+
+		enableWorldGen = CommonConfig.createConfigBool(config, CATEGORY_WORLD_GEN, "00.01_enableWorldGen", "Whether ALL worldgen is enabled or not", true);
+		enableStructureGen = CommonConfig.createConfigBool(config, CATEGORY_WORLD_GEN, "00.02_enableStructureGen", "Whether structures generate or not", true);
+		enableOreGen = CommonConfig.createConfigBool(config, CATEGORY_WORLD_GEN, "00.03_enableOreGen", "Whether ores generate or not", true);
 
 		String dimRadComment = "Amount of background radiation in the dimension in Rad/s - <dimID:Rad> (Int:Float)";
 		dimensionRad = CommonConfig.createConfigHashMap(config, CATEGORY_DIMRAD, "01.01_dimensionRadiation", dimRadComment, "Int", "Float", new String[]{ "0:0.0", "-1:0.666", "1:0.001", "-28:0.245", "-27:0.0288", "-26:0.0288", "-29:0.0212", "-30:10", "-31:0.1" }, ":");
@@ -165,7 +174,6 @@ public class CompatibilityConfig {
 		endTixiteSpawn = CommonConfig.createConfigHashMap(config, CATEGORY_DIMORE, "03.E01_tixiteSpawnrate", "Amount of end trixite per chunk - <dimID:amount> (Int:Int)", "Int", "Int", new String[]{ "1:8" }, ":");
 
 		//Structures
-		enableWorldGen = CommonConfig.createConfigBool(config, CATEGORY_DIMSTRUC, "03.01_enableWorldGen", "Enable worldgen", true);
 		radioStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.02_radioSpawn", "Spawn radio station on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:1000" }, ":");
 		antennaStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.03_antennaSpawn", "Spawn antenna on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:750" }, ":");
 		atomStructure = CommonConfig.createConfigHashMap(config, CATEGORY_DIMSTRUC, "03.04_atomSpawn", "Spawn power plant on every nTH chunk - <dimID:n> (Int:Int)", "Int", "Int", new String[]{ "0:500" }, ":");

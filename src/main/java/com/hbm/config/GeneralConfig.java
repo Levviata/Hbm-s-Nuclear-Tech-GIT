@@ -79,6 +79,7 @@ public class GeneralConfig {
 	public static boolean enableReflectorCompat = false;
 	public static int coltanRate = 2;
 	public static int bedrockRate = 50;
+	public static boolean whichReloadToUse = true;
 	
 	public static void loadFromConfig(Configuration config){
 		final String CATEGORY_GENERAL = "01_general";
@@ -118,8 +119,10 @@ public class GeneralConfig {
 			}
 		useShaders = false;
 		Property ssg_anim = config.get(CATEGORY_GENERAL, "1.24_ssgAnimType", true);
+
 		ssg_anim.setComment("Which supershotgun reload animation to use. True is Drillgon's animation, false is Bob's animation");
 		ssgAnim = ssg_anim.getBoolean();
+
 		instancedParticles = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.25_instancedParticles", "Enables instanced particle rendering for some particles, which makes them render several times faster. May not work on all computers, and will break with shaders.", true);
 		depthEffects = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.25_depthBufferEffects", "Enables effects that make use of reading from the depth buffer", true);
 		flashlight = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.25_flashlights", "Enables dynamic directional lights", true);
@@ -155,7 +158,8 @@ public class GeneralConfig {
 		advancedRadiation = adv_rads.getBoolean(true);
 		
 		bloodFX = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.32_enable_blood_effects", "Enables the over-the-top blood visual effects for some weapons", true);
-	
+
+		whichReloadToUse = CommonConfig.createConfigBool(config, CATEGORY_GENERAL, "1.33_whichReloadToUse", "Which reload key to get prioritized in the case of conflict. True is HBM's, false is MrCrayfish Gun's", true);
 		if((instancedParticles || depthEffects || flowingDecalAmountMax > 0 || bloodFX || bloom || heatDistortion) && (!GLCompat.error.isEmpty() || !useShaders2)){
 			MainRegistry.logger.error("Warning - Open GL 3.3 not supported! Disabling 3.3 effects...");
 			if(!useShaders2){

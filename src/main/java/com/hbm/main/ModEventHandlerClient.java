@@ -21,7 +21,6 @@ import com.hbm.blocks.ILookOverlay;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.blocks.generic.TrappedBrick.Trap;
 import com.hbm.capability.HbmCapability;
-import com.hbm.capability.HbmLivingCapability.EntityHbmPropsProvider;
 import com.hbm.config.GeneralConfig;
 import com.hbm.entity.mob.EntityHunterChopper;
 import com.hbm.entity.projectile.EntityChopperMine;
@@ -44,7 +43,6 @@ import com.hbm.interfaces.IItemHUD;
 import com.hbm.interfaces.IPostRender;
 import com.hbm.interfaces.Spaghetti;
 import com.hbm.inventory.AssemblerRecipes;
-import com.hbm.inventory.BedrockOreRegistry;
 import com.hbm.inventory.RecipesCommon.ComparableStack;
 import com.hbm.inventory.RecipesCommon.NbtComparableStack;
 import com.hbm.inventory.gui.GUIArmorTable;
@@ -63,7 +61,6 @@ import com.hbm.items.machine.ItemRBMKPellet;
 import com.hbm.items.special.ItemHot;
 import com.hbm.items.special.ItemWasteLong;
 import com.hbm.items.special.ItemWasteShort;
-import com.hbm.items.special.ItemBedrockOre;
 import com.hbm.items.special.weapon.GunB92;
 import com.hbm.items.tool.ItemFluidCanister;
 import com.hbm.items.tool.ItemGuideBook;
@@ -109,11 +106,8 @@ import com.hbm.render.item.FluidTankBakedModel;
 import com.hbm.render.item.FluidTankRender;
 import com.hbm.render.item.ItemRenderBase;
 import com.hbm.render.item.ItemRenderLibrary;
-import com.hbm.render.item.ItemRendererBedrockOre;
 import com.hbm.render.item.TEISRBase;
 import com.hbm.render.item.weapon.B92BakedModel;
-import com.hbm.render.item.weapon.GunRevolverBakedModel;
-import com.hbm.render.item.weapon.GunRevolverRender;
 import com.hbm.render.item.weapon.ItemRedstoneSwordRender;
 import com.hbm.render.item.weapon.ItemRenderGunAnim;
 import com.hbm.render.item.weapon.ItemRenderGunEgon;
@@ -1203,7 +1197,7 @@ public class ModEventHandlerClient {
 	
 	@SubscribeEvent
 	public void cameraSetup(EntityViewRenderEvent.CameraSetup e){
-		RecoilHandler.modifiyCamera(e);
+		RecoilHandler.modifyCamera(e);
 		JetpackHandler.handleCameraTransform(e);
 	}
 	

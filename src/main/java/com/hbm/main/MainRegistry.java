@@ -396,7 +396,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 
-import static com.hbm.config.CompatibilityConfig.enableWorldGen;
+import static com.hbm.config.WorldConfig.enableWorldGenReference;
 
 @Mod(modid = RefStrings.MODID, version = RefStrings.VERSION, name = RefStrings.NAME)
 public class MainRegistry {
@@ -570,7 +570,9 @@ public class MainRegistry {
 		PotionRecipes.registerPotionRecipes();
 
 		proxy.registerRenderInfo();
-		if (enableWorldGen) {
+
+		// Here we intercept the registration of this mod's world gen
+		if (enableWorldGenReference) {
 			HbmWorld.mainRegistry();
 		}
 		proxy.preInit(event);

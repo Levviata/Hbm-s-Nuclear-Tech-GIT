@@ -3,7 +3,6 @@ package com.hbm.config;
 import com.hbm.config.CompatibilityConfig;
 
 public class WorldConfig {
-
 	public static int uraniumSpawn = 6;
 	public static int thoriumSpawn = 7;
 	public static int titaniumSpawn = 8;
@@ -66,7 +65,9 @@ public class WorldConfig {
 	public static int arcticStructure = 500;
 	public static int jungleStructure = 2000;
 	public static int pyramidStructure = 4000;
-	
+	public static boolean enableWorldGenReference = true;
+	public static boolean enableStructureGenReference = true;
+	public static boolean enableOreGenReference = true;
 	public static int meteorStrikeChance = 20 * 60 * 180;
 	public static int meteorShowerChance = 20 * 60 * 5;
 	public static int meteorShowerDuration = 6000;
@@ -79,6 +80,9 @@ public class WorldConfig {
 	
 	public static void loadFromCompatibilityConfig() {
 
+		enableWorldGenReference = CompatibilityConfig.enableWorldGen;
+		enableStructureGenReference = CompatibilityConfig.enableStructureGen;
+		enableOreGenReference = CompatibilityConfig.enableOreGen;
 		uraniumSpawn = convertToInt(CompatibilityConfig.uraniumSpawn.get(0));
 		titaniumSpawn = convertToInt(CompatibilityConfig.titaniumSpawn.get(0));
 		sulfurSpawn = convertToInt(CompatibilityConfig.sulfurSpawn.get(0));
